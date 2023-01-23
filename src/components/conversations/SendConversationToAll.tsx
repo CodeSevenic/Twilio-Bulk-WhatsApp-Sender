@@ -36,7 +36,7 @@ const SendConversationToAll: React.FC<NewConvoProps> = (
         variant="secondary"
         onClick={() => sendToAll("Sibusiso")}
       >
-        Send Template Communication to All Investors
+        {/* Send Template Communication to All Investors */}
       </Button>
     </>
   );
