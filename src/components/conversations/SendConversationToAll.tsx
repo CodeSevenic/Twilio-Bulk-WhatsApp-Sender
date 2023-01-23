@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Client } from "@twilio/conversations";
-
-import ConversationTitleModal from "../modals/ConversationTitleModal";
 import { addConversation } from "../../api";
 import { Button } from "@twilio-paste/button";
 import { useDispatch } from "react-redux";
