@@ -8,6 +8,7 @@ import CreateConversationButton from "./CreateConversationButton";
 import ConversationsList from "./ConversationsList";
 import styles from "../../styles";
 import SendConversationToAll from "./SendConversationToAll";
+import { ReduxConversation } from "../../store/reducers/convoReducer";
 
 interface ConvosContainerProps {
   client?: Client;

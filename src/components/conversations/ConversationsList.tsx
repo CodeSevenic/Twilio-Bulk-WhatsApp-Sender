@@ -86,6 +86,8 @@ const ConversationsList: React.FC = () => {
     addNotifications,
   } = bindActionCreators(actionCreators, dispatch);
 
+  //conversations.forEach((convo) => console.log(convo.sid));
+
   if (conversations === undefined || conversations === null) {
     return <div className="empty" />;
   }
