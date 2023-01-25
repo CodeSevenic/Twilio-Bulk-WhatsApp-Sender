@@ -25,7 +25,7 @@ const SendConversationToAll: React.FC<NewConvoProps> = (
   const sendToAll = async (title: string) => {
     const convo = await addConversation(
       title,
-      // updateParticipants,
+      updateParticipants,
       props.client,
       addNotifications
     );
