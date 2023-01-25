@@ -1,12 +1,13 @@
 import React, { useMemo, useState } from "react";
 import { Client } from "@twilio/conversations";
-import { addConversation } from "../../api";
+import { addConversation, addParticipant } from "../../api";
 import { Button } from "@twilio-paste/button";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators, AppState } from "../../store";
 import { ReduxConversation } from "../../store/reducers/convoReducer";
 import { getSdkConversationObject } from "../../conversations-objects";
+import { ERROR_MODAL_MESSAGES, WHATSAPP_PREFIX } from "../../constants";
 
 interface NewConvoProps {
   client?: Client;
@@ -24,12 +25,28 @@ const SendConversationToAll: React.FC<NewConvoProps> = (
   const sendToAll = async (title: string) => {
     const convo = await addConversation(
       title,
-      updateParticipants,
+      // updateParticipants,
       props.client,
       addNotifications
     );
     updateCurrentConversation(convo.sid);
+
+    try {
+      await addParticipant(
+        WHATSAPP_PREFIX + "27720549583",
+        WHATSAPP_PREFIX + "27600598118",
+        false,
+        convo,
+        addNotifications
+      );
+    } catch (e) {
+      console.log(ERROR_MODAL_MESSAGES.ADD_PARTICIPANT);
+    }
   };
+
+  conversations.map((convo) => {
+    console.log(convo.sid);
+  });
 
   // const sdkConvo = useMemo(
   //   () => getSdkConversationObject(props.convo),
