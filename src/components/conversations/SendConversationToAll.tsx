@@ -1,12 +1,10 @@
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { Client } from "@twilio/conversations";
 import { addConversation, addParticipant } from "../../api";
 import { Button } from "@twilio-paste/button";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators, AppState } from "../../store";
-import { ReduxConversation } from "../../store/reducers/convoReducer";
-import { getSdkConversationObject } from "../../conversations-objects";
 import { ERROR_MODAL_MESSAGES, WHATSAPP_PREFIX } from "../../constants";
 
 interface NewConvoProps {
