@@ -5,7 +5,7 @@ import { Button } from "@twilio-paste/button";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators, AppState } from "../../store";
-// import { ERROR_MODAL_MESSAGES, WHATSAPP_PREFIX } from "../../constants";
+import { ERROR_MODAL_MESSAGES, WHATSAPP_PREFIX } from "../../constants";
 
 interface NewConvoProps {
   client?: Client;
