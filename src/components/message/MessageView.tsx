@@ -51,6 +51,7 @@ const MessageView: React.FC<SingleMessageProps> = (
   const { text, getStatus, onDeleteMessage } = props;
 
   const [status, setStatus] = useState<MessageStatuses>({});
+  // console.log(status);
   const sid = useSelector((state: AppState) => state.sid);
   const participants =
     useSelector((state: AppState) => state.participants)[sid] ?? [];

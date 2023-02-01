@@ -32,7 +32,7 @@ async function login(
     setToken(token);
 
     return "";
-  } catch (error) {
+  } catch (error: any) {
     return error;
   }
 }
@@ -55,8 +55,8 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
             color="colorTextInverse"
           />
         </Box>
-        <div style={styles.loginTitle}>Twilio Conversations</div>
-        <div style={styles.subTitle}>Demo experience</div>
+        <div style={styles.loginTitle}>African Rainbow Capital</div>
+        <div style={styles.subTitle}></div>
         <Box style={styles.loginForm}>
           <Box style={styles.userInput}>
             <ModalInputField
@@ -108,9 +108,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
             </Button>
           </Box>
         </Box>
-        <Box style={{ paddingTop: 40 }}>
-          <TwilioLogo />
-        </Box>
+        <Box style={{ paddingTop: 40 }}>{/* <TwilioLogo /> */}</Box>
       </Box>
       <Box style={styles.loginBackground}>
         <Box

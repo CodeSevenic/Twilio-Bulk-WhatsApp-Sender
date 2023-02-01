@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Client } from "@twilio/conversations";
 import { addConversation, addParticipant } from "../../api";
 import { Button } from "@twilio-paste/button";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators, AppState } from "../../store";
-import { ERROR_MODAL_MESSAGES, WHATSAPP_PREFIX } from "../../constants";
+import {
+  ERROR_MODAL_MESSAGES,
+  UNEXPECTED_ERROR_MESSAGE,
+  WHATSAPP_PREFIX,
+} from "../../constants";
+import { getSdkConversationObject } from "../../conversations-objects";
+import { unexpectedErrorNotification } from "../../helpers";
+import { db } from "../../config";
+import { onValue, ref } from "firebase/database";
+import { PlusIcon } from "@twilio-paste/icons/esm/PlusIcon";
 
 interface NewConvoProps {
   client?: Client;
@@ -20,7 +29,53 @@ const SendConversationToAll: React.FC<NewConvoProps> = (
   const { updateCurrentConversation, addNotifications, updateParticipants } =
     bindActionCreators(actionCreators, dispatch);
 
-  const sendToAll = async (title: string) => {
+  const [arcData, setArcData] = useState<any[]>([]);
+
+  useEffect(() => {
+    const starCountRef = ref(
+      db,
+      "1BkCdhX282Oi2IxrPzwOktENF0okwxSpKEM8ab8qNCm4/Sheet1/"
+    );
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      const newPosts = Object.keys(data).map((key) => ({
+        id: key,
+        ...data[key],
+      }));
+      setArcData(newPosts);
+    });
+  }, []);
+
+  const onMessageSend = async (message: string, convo: any) => {
+    if (message.length == 0) {
+      return;
+    }
+
+    const currentDate: Date = new Date();
+    const sdkConvo = getSdkConversationObject(convo);
+
+    const newMessageBuilder = sdkConvo.prepareMessage().setBody(message);
+
+    console.log(newMessageBuilder);
+
+    const messageIndex = await newMessageBuilder.build().send();
+
+    try {
+      await sdkConvo.advanceLastReadMessageIndex(messageIndex ?? 0);
+    } catch (e) {
+      unexpectedErrorNotification(addNotifications);
+      return Promise.reject(UNEXPECTED_ERROR_MESSAGE);
+    }
+  };
+
+  console.log(arcData);
+
+  const sendToAll = async (
+    title: string,
+    senderNumber: string,
+    participantNumber: string,
+    message: string
+  ) => {
     const convo = await addConversation(
       title,
       updateParticipants,
@@ -28,38 +83,41 @@ const SendConversationToAll: React.FC<NewConvoProps> = (
       addNotifications
     );
     updateCurrentConversation(convo.sid);
-
     try {
       await addParticipant(
-        WHATSAPP_PREFIX + "27720549583",
-        WHATSAPP_PREFIX + "27600598118",
+        WHATSAPP_PREFIX + participantNumber,
+        WHATSAPP_PREFIX + senderNumber,
         false,
         convo,
         addNotifications
-      );
+      ).then((res) => console.log(res));
+
+      await onMessageSend(message, convo);
     } catch (e) {
       console.log(ERROR_MODAL_MESSAGES.ADD_PARTICIPANT);
     }
   };
 
-  conversations.map((convo) => {
-    console.log(convo.sid);
-  });
+  const msg = `Good day {{1}}, \n\nThank you for your continued support of Ubuntu-Botho Investments. \n\nPlease find our latest newsletter on our website link \nWe look forward to hearing from you if you have any questions. \n\nKind Regards, \nUbuntu-Botho Investments`;
 
-  // const sdkConvo = useMemo(
-  //   () => getSdkConversationObject(props.convo),
-  //   [props.convo.sid]
-  // );
+  const bulkSend = () => {
+    arcData.map((contact) => {
+      const message = `Good day ${contact.Name}, \n\nThank you for your continued support of Ubuntu-Botho Investments. \n\nPlease find our latest newsletter: https://dev2.marketsonline.co.za/african-rainbow-capital/ \n\nWe look forward to hearing from you if you have any questions. \nJust reply “Hi” to this message. \n\nKind Regards, \nUbuntu-Botho Investments`;
+      sendToAll(contact.Name, "27600598118", contact.Number, message);
+    });
+  };
 
   return (
     <>
-      <Button
-        fullWidth
-        variant="secondary"
-        onClick={() => sendToAll("Sibusiso")}
-      >
-        Send Template Communication to All Investors
-      </Button>
+      {props.collapsed ? (
+        <Button fullWidth variant="secondary" onClick={() => bulkSend()}>
+          All
+        </Button>
+      ) : (
+        <Button fullWidth variant="secondary" onClick={() => bulkSend()}>
+          Send Template Communication to All Investors
+        </Button>
+      )}
     </>
   );
 };

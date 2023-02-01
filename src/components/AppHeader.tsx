@@ -8,8 +8,6 @@ import { ChevronDownIcon } from "@twilio-paste/icons/esm/ChevronDownIcon";
 import React, { useMemo } from "react";
 import styles from "../styles";
 import { ConnectionState } from "@twilio/conversations";
-import { db } from "../config";
-import { ref, onValue } from "firebase/database";
 
 type AppHeaderProps = {
   user: string;
@@ -22,25 +20,6 @@ const AppHeader: React.FC<AppHeaderProps> = ({
   connectionState,
 }) => {
   const menu = useMenuState();
-
-  const [arcData, setArcData] = useState<any[]>([]);
-
-  useEffect(() => {
-    const starCountRef = ref(
-      db,
-      "1BkCdhX282Oi2IxrPzwOktENF0okwxSpKEM8ab8qNCm4/Sheet1/"
-    );
-    onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();
-      console.log(data);
-      const newPosts = Object.keys(data).map((key) => ({
-        id: key,
-        ...data[key],
-      }));
-      console.log("NEW POSTS: ", newPosts);
-      setArcData(newPosts);
-    });
-  }, []);
 
   const label: "online" | "connecting" | "offline" = useMemo(() => {
     switch (connectionState) {

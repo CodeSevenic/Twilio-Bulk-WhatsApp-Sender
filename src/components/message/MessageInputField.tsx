@@ -32,6 +32,7 @@ const MessageInputField: React.FC<SendMessageProps> = (
   props: SendMessageProps
 ) => {
   const [message, setMessage] = useState("");
+
   const [files, setFiles] = useState<File[]>([]);
   // needed to clear input type=file
   const [filesInputKey, setFilesInputKey] = useState<string>("input-key");
@@ -101,6 +102,7 @@ const MessageInputField: React.FC<SendMessageProps> = (
     const sdkConvo = getSdkConversationObject(convo);
 
     const newMessageBuilder = sdkConvo.prepareMessage().setBody(message);
+    console.log(newMessageBuilder);
 
     // const newMessage: ReduxMessage = {
     //   author: client.user.identity,
@@ -141,6 +143,7 @@ const MessageInputField: React.FC<SendMessageProps> = (
     } catch (e) {
       unexpectedErrorNotification(addNotifications);
       return Promise.reject(UNEXPECTED_ERROR_MESSAGE);
+      console.log(e);
     }
   };
 

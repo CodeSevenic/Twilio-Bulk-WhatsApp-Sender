@@ -22,6 +22,8 @@ export default {
     width: 320,
     position: "relative",
     backgroundColor: "#F4F4F6",
+    display: "grid",
+    gridTemplateRows: "1fr 1fr 20fr 1fr",
   } as CSSProperties,
   messagesWrapper: {
     flex: 1,
@@ -67,9 +69,10 @@ export default {
   } as CSSProperties,
   convoList: {
     overflowY: "auto",
-    position: "relative",
-    top: "65px",
-    bottom: "60px",
+    // height: "60vh",
+    // position: "relative",
+    // top: "65px",
+    // bottom: "60px",
   } as CSSProperties,
   collapseButtonBox: {
     display: "flex",
@@ -80,7 +83,7 @@ export default {
     paddingBottom: "20px",
     paddingRight: "16px",
     paddingLeft: "16px",
-    position: "absolute",
+    // position: "absolute",
     bottom: 0,
     borderTop: "1px solid #CACDD8",
   } as CSSProperties,

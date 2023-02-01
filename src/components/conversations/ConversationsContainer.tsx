@@ -21,6 +21,7 @@ const ConversationsContainer: React.FC<ConvosContainerProps> = (
 
   return (
     <Box
+      className="left-container"
       style={
         listHidden
           ? { ...styles.convosWrapper, ...styles.collapsedList }
