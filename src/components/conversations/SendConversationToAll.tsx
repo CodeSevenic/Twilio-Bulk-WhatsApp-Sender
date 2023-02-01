@@ -31,6 +31,18 @@ const SendConversationToAll: React.FC<NewConvoProps> = (
 
   const [arcData, setArcData] = useState<any[]>([]);
 
+  const date = new Date();
+  let hours = date.getHours();
+  let minutes: any = date.getMinutes();
+  let seconds: any = date.getSeconds();
+  const ampm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+  const time = hours + ":" + minutes + ":" + seconds + " " + ampm;
+  console.log(time);
+
   useEffect(() => {
     const starCountRef = ref(
       db,
@@ -109,6 +121,19 @@ const SendConversationToAll: React.FC<NewConvoProps> = (
 
   return (
     <>
+      <div>
+        <small
+          style={{
+            textAlign: "center",
+            display: "block",
+            margin: "0 0 10px auto",
+            color: "#119baa",
+            fontWeight: "bold",
+          }}
+        >
+          Update at {time}
+        </small>
+      </div>
       {props.collapsed ? (
         <Button fullWidth variant="secondary" onClick={() => bulkSend()}>
           All
