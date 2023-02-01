@@ -131,7 +131,7 @@ const SendConversationToAll: React.FC<NewConvoProps> = (
             fontWeight: "bold",
           }}
         >
-          Update at {time}
+          Updated at {time}
         </small>
       </div>
       {props.collapsed ? (
