@@ -31,12 +31,12 @@ const ConversationsContainer: React.FC<ConvosContainerProps> = (
       <Box style={styles.newConvoButton}>
         <SendConversationToAll client={props.client} collapsed={listHidden} />
       </Box>
-      <Box style={styles.newConvoButton}>
+      {/* <Box style={styles.newConvoButton}>
         <CreateConversationButton
           client={props.client}
           collapsed={listHidden}
         />
-      </Box>
+      </Box> */}
       <Box className="convo-Container" style={styles.convoList}>
         {!listHidden ? <ConversationsList /> : null}
       </Box>

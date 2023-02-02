@@ -23,7 +23,7 @@ export default {
     position: "relative",
     backgroundColor: "#F4F4F6",
     display: "grid",
-    gridTemplateRows: "1fr 1fr 20fr 1fr",
+    gridTemplateRows: "1fr 20fr 1fr",
   } as CSSProperties,
   messagesWrapper: {
     flex: 1,
