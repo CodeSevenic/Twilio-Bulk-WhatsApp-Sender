@@ -31,9 +31,7 @@ interface SendMessageProps {
 const MessageInputField: React.FC<SendMessageProps> = (
   props: SendMessageProps
 ) => {
-  const [messaage, setMessage] = useState("");
-
-  const message = `Good day Sibs, \n\nThank you for your continued support of Ubuntu-Botho Investments. \n\nPlease find our latest newsletter on the link below. \n\nWe look forward to hearing from you if you have any questions. \n\nKind Regards, \nUbuntu-Botho Investments`;
+  const [message, setMessage] = useState("");
 
   const [files, setFiles] = useState<File[]>([]);
   // needed to clear input type=file
