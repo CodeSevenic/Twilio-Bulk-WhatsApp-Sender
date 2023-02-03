@@ -110,11 +110,10 @@ const SendConversationToAll: React.FC<NewConvoProps> = (
     }
   };
 
-  const msg = `Good day {{1}}, \n\nThank you for your continued support of Ubuntu-Botho Investments. \n\nPlease find our latest newsletter on our website link \nWe look forward to hearing from you if you have any questions. \n\nKind Regards, \nUbuntu-Botho Investments`;
-
   const bulkSend = () => {
     arcData.map((contact) => {
-      const message = `Good day ${contact.Name}, \n\nThank you for your continued support of Ubuntu-Botho Investments. \n\nPlease find our latest newsletter: https://dev2.marketsonline.co.za/african-rainbow-capital/ \n\nWe look forward to hearing from you if you have any questions. \nJust reply “Hi” to this message. \n\nKind Regards, \nUbuntu-Botho Investments`;
+      const message = `Good day ${contact.Name}, \n\nThank you for your continued support of Ubuntu-Botho Investments. \nPlease find our latest newsletter on our website link \n\nWe look forward to hearing from you if you have any questions. \n\nKind Regards, \nUbuntu-Botho Investments`;
+      // const message = `Good day ${contact.Name}, \n\nThank you for your continued support of Ubuntu-Botho Investments. \n\nPlease find our latest newsletter: https://dev2.marketsonline.co.za/african-rainbow-capital/ \n\nWe look forward to hearing from you if you have any questions. \nJust reply “Hi” to this message. \n\nKind Regards, \nUbuntu-Botho Investments`;
       sendToAll(contact.Name, "27600598118", contact.Number, message);
     });
   };

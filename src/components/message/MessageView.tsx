@@ -75,7 +75,7 @@ const MessageView: React.FC<SingleMessageProps> = (
           >
             <Box
               style={{
-                backgroundColor: theme.backgroundColors.colorBackgroundPrimary,
+                backgroundColor: "#011f46",
                 color: theme.backgroundColors.colorBackgroundBody,
                 fontFamily: theme.fonts.fontFamilyText,
                 fontSize: theme.fontSizes.fontSize30,
@@ -86,6 +86,7 @@ const MessageView: React.FC<SingleMessageProps> = (
                 paddingLeft: theme.space.space30,
                 paddingRight: theme.space.space30,
                 borderRadius: theme.space.space30,
+                whiteSpace: "pre-wrap",
               }}
             >
               {props.media}

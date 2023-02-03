@@ -33,6 +33,8 @@ const MessageInputField: React.FC<SendMessageProps> = (
 ) => {
   const [message, setMessage] = useState("");
 
+  // const message = `Good day Sib, \n\nThank you for your continued support of Ubuntu-Botho Investments. \nPlease find our latest newsletter on our website link \n\nWe look forward to hearing from you if you have any questions. \n\nKind Regards, \nUbuntu-Botho Investments`;
+
   const [files, setFiles] = useState<File[]>([]);
   // needed to clear input type=file
   const [filesInputKey, setFilesInputKey] = useState<string>("input-key");

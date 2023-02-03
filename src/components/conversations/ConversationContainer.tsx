@@ -35,7 +35,7 @@ const ConversationContainer: React.FC<ConvoContainerProps> = (
   const { pushMessages } = bindActionCreators(actionCreators, dispatch);
 
   return (
-    <Box style={styles.convosWrapperBox}>
+    <Box className="HELOO" style={styles.convosWrapperBox}>
       {sid && props.conversation && props.client ? (
         <>
           <ConversationDetails
