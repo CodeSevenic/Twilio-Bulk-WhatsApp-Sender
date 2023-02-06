@@ -9,6 +9,7 @@ import { InputType } from "../../types";
 import ModalInputField from "../modals/ModalInputField";
 import styles from "../../styles";
 import TwilioLogo from "../icons/TwilioLogo";
+import { UBILogo } from "../icons/UBILogo";
 
 type SetTokenType = (token: string) => void;
 
@@ -47,16 +48,24 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   return (
     <Box style={styles.loginContainer}>
       <Box style={styles.loginContent}>
-        <Box>
+        <div
+          style={{
+            marginBottom: "20px",
+            width: "180px",
+          }}
+        >
+          <UBILogo />
+        </div>
+        {/* <Box>
           <ProductConversationsIcon
             decorative={true}
             size="sizeIcon90"
             style={styles.logo}
             color="colorTextInverse"
           />
-        </Box>
-        <div style={styles.loginTitle}>African Rainbow Capital</div>
-        <div style={styles.subTitle}></div>
+        </Box> */}
+        {/* <div style={styles.loginTitle}>African Rainbow Capital</div> */}
+        {/* <div style={styles.subTitle}></div> */}
         <Box style={styles.loginForm}>
           <Box style={styles.userInput}>
             <ModalInputField
