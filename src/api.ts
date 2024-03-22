@@ -96,7 +96,7 @@ export async function addParticipant(
       return Promise.reject(e);
     }
   }
-  // return Promise.reject(UNEXPECTED_ERROR_MESSAGE);
+  return Promise.reject(UNEXPECTED_ERROR_MESSAGE);
 }
 
 export async function getToken(
